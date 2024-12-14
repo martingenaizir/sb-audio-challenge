@@ -2,10 +2,15 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/martingenaizir/sb-audio-challenge/cmd/modules"
 	"net/http"
 )
 
 func newApplication() error {
+	if err := modules.Configure(); err != nil {
+		return err
+	}
+
 	gin.SetMode(gin.DebugMode)
 	g := gin.Default()
 
