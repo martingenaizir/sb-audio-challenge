@@ -50,3 +50,11 @@ func BadRequestError(message string) ApiError {
 		ErrorStatus:  http.StatusText(http.StatusBadRequest),
 	}
 }
+
+func NotFound(message string) ApiError {
+	return apiError{
+		ErrorMessage: message,
+		ErrorCode:    http.StatusNotFound,
+		ErrorStatus:  http.StatusText(http.StatusNotFound),
+	}
+}

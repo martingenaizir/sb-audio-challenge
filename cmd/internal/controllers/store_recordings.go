@@ -8,13 +8,20 @@ import (
 )
 
 func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
-	_, fileErr := ctx.FormFile(constants.AudioFileFormKey)
+	file, fileErr := ctx.FormFile(constants.AudioFileFormKey)
 	if fileErr != nil {
 		_ = ctx.Error(apierrors.BadRequestError("missing or invalid audio file"))
+	}
+
+	if err := c.services.StoreUserRecordedPhrase(
+		ctx.Request.Context(),
+		ctx.GetInt64(constants.UserIDParamKey),
+		ctx.GetInt64(constants.PhraseIDParamKey),
+		file,
+	); err != nil {
+		_ = ctx.Error(err)
 		return
 	}
 
-	// TODO
-
-	ctx.Status(http.StatusServiceUnavailable)
+	ctx.Status(http.StatusOK)
 }
