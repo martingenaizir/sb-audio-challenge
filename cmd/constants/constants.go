@@ -10,9 +10,10 @@ const GinModeKey = "GIN_MODE"
 
 // App.
 const (
-	AppPortKey  = "APP_PORT"
-	LogLevelKey = "APP_LOG_LEVEL"
-	LogLevelDef = "info"
+	AppPortKey            = "APP_PORT"
+	LogLevelKey           = "APP_LOG_LEVEL"
+	LogLevelDef           = "info"
+	WithRecordingsHistory = false
 )
 
 // DB.
