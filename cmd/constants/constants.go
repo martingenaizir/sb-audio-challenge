@@ -27,3 +27,11 @@ const (
 )
 
 var DBPools = []string{DBReadPool, DBWritePool}
+
+// Params.
+const (
+	UserIDParamKey      = "user_id"
+	PhraseIDParamKey    = "phrase_id"
+	AudioFileFormKey    = "audio_file"
+	AudioFormatParamKey = "audio_format"
+)
