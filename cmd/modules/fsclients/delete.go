@@ -1,6 +1,10 @@
 package fsclients
 
+import (
+	"os"
+	"path/filepath"
+)
+
 func (c client) Remove(filePath string) error {
-	//TODO implement me
-	panic("implement me")
+	return os.Remove(filepath.Join(c.fsPath, filePath))
 }
