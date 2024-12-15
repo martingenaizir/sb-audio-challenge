@@ -28,7 +28,7 @@ func (d UserPhraseData) HasRecording() bool {
 	return d.recordID.Valid && d.recordID.Int64 > 0
 }
 
-func (d UserPhraseData) RecordRelativePath() string {
+func (d UserPhraseData) RecordPath() string {
 	return d.recordRelativePath.String
 }
 

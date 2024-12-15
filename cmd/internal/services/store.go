@@ -30,7 +30,7 @@ func (s services) StoreUserRecordedPhrase(ctx context.Context, userID, phraseID 
 		return sErr
 	}
 
-	if err = s.phrases.StoreUserRecording(ctx, practiceData, storedFile); err != nil {
+	if err = s.phrases.StoreUserRecording(ctx, practiceData, storedFile.Path()); err != nil {
 		go s.recordings.RemoveFile(storedFile)
 		return err
 	}

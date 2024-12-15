@@ -58,3 +58,11 @@ func NotFound(message string) ApiError {
 		ErrorStatus:  http.StatusText(http.StatusNotFound),
 	}
 }
+
+func ContentTooLargeError(message string) ApiError {
+	return apiError{
+		ErrorMessage: message,
+		ErrorCode:    http.StatusRequestEntityTooLarge,
+		ErrorStatus:  http.StatusText(http.StatusRequestEntityTooLarge),
+	}
+}
