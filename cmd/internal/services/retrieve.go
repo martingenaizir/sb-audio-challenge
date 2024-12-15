@@ -5,14 +5,14 @@ import (
 	"github.com/martingenaizir/sb-audio-challenge/cmd/internal/apierrors"
 )
 
-func (s services) GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, error) {
+func (s services) GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, string, error) {
 	userPhraseData, err := s.phrases.GetPracticeData(ctx, userID, phraseID)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	if !userPhraseData.IsValidUser() || !userPhraseData.IsAccessiblePhrase() || !userPhraseData.HasRecording() {
-		return "", apierrors.NotFound("practice record not found")
+		return "", "", apierrors.NotFound("practice record not found")
 	}
 
 	return s.recordings.RetrieveAs(ctx, userPhraseData.RecordPath(), outputFormat)

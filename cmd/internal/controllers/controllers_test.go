@@ -40,8 +40,8 @@ func TestController_GetRecordedPracticePhrase(t *testing.T) {
 		{
 			name: "get recording error",
 			fields: fields{
-				services: services.Mock{OnGetUserRecordedPhrase: func(_ context.Context, _, _ int64, _ string) (string, error) {
-					return "", errors.New("error")
+				services: services.Mock{OnGetUserRecordedPhrase: func(_ context.Context, _, _ int64, _ string) (string, string, error) {
+					return "", "", errors.New("error")
 				}},
 			},
 			args: args{

@@ -9,7 +9,7 @@ import (
 )
 
 type Services interface {
-	GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, error)
+	GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, string, error)
 	StoreUserRecordedPhrase(ctx context.Context, userID, phraseID int64, recordingFile *multipart.FileHeader) error
 }
 

@@ -50,7 +50,8 @@ cd sb-audio-challenge
 docker compose up -d 
 ```
 
-The application will run at `http://localhost:8080`.
+- The application will run at `http://localhost:8080`. 
+- The database runs on port `:3306`
 
 ### Preloaded Data
 The database has **2 users**, which correspond to the IDs: `1` and `2`
@@ -101,6 +102,7 @@ curl --request GET 'http://localhost:8080/audio/user/1/phrase/1/m4a' -o './test_
 - **Description**: Upload an audio file for a specific user and phrase.
 - **Request Body**:
     - A multipart form with the key `audio_file`, containing the audio file to upload.
+    - The maximum allowed file size for uploads is 5MB.
 - **Example**:
   ```bash
   curl --request POST 'http://localhost:8080/audio/user/1/phrase/1' --form 'audio_file=@"./audio.m4a"'
@@ -131,7 +133,7 @@ The application uses a MySQL v8.0 database consisting of three simple tables:
 ## Recording history
 By default, the app has recording `history` disabled. That is, both the database and the FS maintain a single phrase record per user.
 
-The history option can be enabled from the `./.env` file, by setting `app.keep_recordings_history=true`.
+The history option can be enabled from the `./.env` file, by setting `APP_WITH_RECORDING_HISTORY=true`.
 > The GET endpoint remains unchanged.
 
 ## Corners cut

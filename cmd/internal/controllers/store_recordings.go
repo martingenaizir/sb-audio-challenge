@@ -25,7 +25,10 @@ func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
 		return
 	}
 
-	ctx.Status(http.StatusOK)
+	ctx.JSON(http.StatusOK, gin.H{
+		"code":    http.StatusOK,
+		"message": "User practice phrase stored successfully",
+	})
 }
 
 var formFile = func(ctx *gin.Context, name string) (*multipart.FileHeader, error) {
