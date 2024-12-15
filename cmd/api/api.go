@@ -1,11 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/internal/controllers"
 	mw "github.com/martingenaizir/sb-audio-challenge/cmd/internal/controllers/middlewares"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/modules"
 	"net/http"
+	"os"
 )
 
 func newApplication() error {
@@ -25,11 +28,13 @@ func newApplication() error {
 	})
 
 	c := controllers.Instance()
-	up := g.Group("/audio/user/:user_id/phrase/:phrase_id", mw.ApiErrorHandler, mw.PhrasesPathValidation)
+
+	g.Use(mw.ApiErrorHandler, mw.PhrasesPathValidation)
+	up := g.Group("/audio/user/:user_id/phrase/:phrase_id")
 	{
 		up.POST("", c.StoreUserPracticePhrase)
 		up.GET("/:audio_format", c.GetRecordedPracticePhrase)
 	}
 
-	return g.Run(":8080")
+	return g.Run(fmt.Sprintf(":%s", os.Getenv(constants.AppPortKey)))
 }

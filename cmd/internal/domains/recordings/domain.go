@@ -5,6 +5,7 @@ import (
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/modules/fsclients"
 	"mime/multipart"
+	"os"
 )
 
 type Domain interface {
@@ -21,8 +22,7 @@ type domain struct {
 
 func Instance() Domain {
 	return &domain{
-		// TODO from .env
-		withHistory: constants.WithRecordingsHistory,
 		fsClient:    fsclients.Instance(),
+		withHistory: os.Getenv(constants.WithRecordingsHistoryKey) == "true",
 	}
 }

@@ -43,9 +43,15 @@ var (
 		extension: "m4a",
 		aliases:   []string{"mp4"},
 	}
+
+	AudioMP3 = AudioType{
+		mimeType:  "audio/mpeg",
+		extension: "mp3",
+		aliases:   []string{},
+	}
 )
 
-var _supportedTypes = []FileType{AudioM4A, AudioWAV}
+var _supportedTypes = []FileType{AudioM4A, AudioWAV, AudioMP3}
 
 func IsSameType(originPath string, fileType FileType) bool {
 	return strings.HasSuffix(originPath, fileType.Extension())

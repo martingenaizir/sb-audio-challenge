@@ -28,7 +28,7 @@ ORDER BY user_phrases.id DESC
 LIMIT 1`
 
 // args: filepath, id.
-const _updatePracticeRecordVersion = `UPDATE user_phrases SET filepath = ? WHERE id = ?`
+const _updatePracticeRecordVersion = `UPDATE user_phrases SET filepath = ?, last_update_time = CURRENT_TIMESTAMP() WHERE id = ?`
 
 // args: user_id, phrase_id, filepath.
 const _insertPracticeRecordVersion = `INSERT INTO user_phrases(user_id, phrase_id, filepath) VALUES (?,?,?)`
