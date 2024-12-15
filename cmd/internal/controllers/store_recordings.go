@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/internal/apierrors"
@@ -28,7 +27,7 @@ func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"code":    http.StatusOK,
-		"message": fmt.Sprintf("User practice phrase stored successfully"),
+		"message": "User practice phrase stored successfully",
 	})
 }
 
