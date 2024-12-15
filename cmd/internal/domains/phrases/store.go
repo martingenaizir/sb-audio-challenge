@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-func (d *domain) StoreUserRecording(ctx context.Context, upd UserPhraseData, filePath string) error {
+func (d *domain) StoreUserPractice(ctx context.Context, upd UserPhraseData, filePath string) error {
 	if !d.withHistory && upd.HasRecording() {
 		return d.updateRecording(ctx, upd.RecordID(), filePath)
 	}

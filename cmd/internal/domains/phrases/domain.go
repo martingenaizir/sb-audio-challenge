@@ -7,8 +7,8 @@ import (
 )
 
 type Domain interface {
-	GetUserPracticeData(ctx context.Context, userID, phraseID int64) (UserPhraseData, error)
-	StoreUserRecording(ctx context.Context, upd UserPhraseData, filePath string) error
+	GetPracticeData(ctx context.Context, userID, phraseID int64) (UserPhraseData, error)
+	StoreUserPractice(ctx context.Context, upd UserPhraseData, filePath string) error
 }
 
 type domain struct {

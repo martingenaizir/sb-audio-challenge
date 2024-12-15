@@ -12,7 +12,7 @@ import (
 const _bucket = "recordings"
 
 func (d *domain) StoreAs(file *multipart.FileHeader, basename, extension string) (StoredFile, error) {
-	storeWithType, ok := fsclients.CastType(extension, basename)
+	storeWithType, ok := fsclients.NewAudioType(extension, basename)
 	if !ok {
 		return StoredFile{}, apierrors.BadRequestError("invalid target format")
 	}
@@ -22,7 +22,7 @@ func (d *domain) StoreAs(file *multipart.FileHeader, basename, extension string)
 		filename = fmt.Sprintf("%d-%s", time.Now().UnixMilli(), basename)
 	}
 
-	path, err := d.storage.StoreAs(file, _bucket, filename, storeWithType)
+	path, err := d.fsClient.StoreAs(file, _bucket, filename, storeWithType)
 	if err != nil {
 		return StoredFile{}, err
 	}

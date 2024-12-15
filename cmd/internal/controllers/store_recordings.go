@@ -4,11 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/internal/apierrors"
+	"mime/multipart"
 	"net/http"
 )
 
 func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
-	file, fileErr := ctx.FormFile(constants.AudioFileFormKey)
+	file, fileErr := formFile(ctx, constants.AudioFileFormKey)
 	if fileErr != nil {
 		_ = ctx.Error(apierrors.BadRequestError("missing or invalid audio file"))
 	}
@@ -24,4 +25,8 @@ func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
 	}
 
 	ctx.Status(http.StatusOK)
+}
+
+var formFile = func(ctx *gin.Context, name string) (*multipart.FileHeader, error) {
+	return ctx.FormFile(name)
 }

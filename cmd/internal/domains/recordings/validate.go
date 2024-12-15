@@ -24,7 +24,7 @@ func (d *domain) ValidateFile(file *multipart.FileHeader) error {
 			float64(constants.MaxAudioFileSizeBytes)/_toMB))
 	}
 
-	if _, ok := fsclients.CastType(file.Header.Get(_contentTypeHeaderKey), file.Filename); !ok {
+	if _, ok := fsclients.NewAudioType(file.Header.Get(_contentTypeHeaderKey), file.Filename); !ok {
 		return apierrors.BadRequestError("unsupported file type")
 	}
 

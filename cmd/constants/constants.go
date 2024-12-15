@@ -1,14 +1,8 @@
 package constants
 
-// Files.
-var (
-	UploadDir = "resources/uploads/"
-	TempDir   = "resources/temp/"
-)
-
 const GinModeKey = "GIN_MODE"
 
-// App.
+// app.
 const (
 	AppPortKey                  = "APP_PORT"
 	LogLevelKey                 = "APP_LOG_LEVEL"
@@ -30,7 +24,7 @@ const (
 
 var DBPools = []string{DBReadPool, DBWritePool}
 
-// Params.
+// params.
 const (
 	UserIDParamKey      = "user_id"
 	PhraseIDParamKey    = "phrase_id"

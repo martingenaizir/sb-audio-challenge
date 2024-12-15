@@ -16,13 +16,13 @@ type Domain interface {
 
 type domain struct {
 	withHistory bool
-	storage     fsclients.Client
+	fsClient    fsclients.Client
 }
 
 func Instance() Domain {
 	return &domain{
 		// TODO from .env
 		withHistory: constants.WithRecordingsHistory,
-		storage:     fsclients.Instance(),
+		fsClient:    fsclients.Instance(),
 	}
 }

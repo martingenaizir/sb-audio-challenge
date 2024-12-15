@@ -7,10 +7,10 @@ import (
 )
 
 func (d *domain) RetrieveAs(ctx context.Context, filePath, outFormat string) (string, error) {
-	wantedFormat, ok := fsclients.CastType(outFormat, "")
+	wantedFormat, ok := fsclients.NewAudioType(outFormat, "")
 	if !ok {
 		return "", apierrors.BadRequestError("invalid format")
 	}
 
-	return d.storage.RetrieveAs(ctx, filePath, wantedFormat)
+	return d.fsClient.RetrieveAs(ctx, filePath, wantedFormat)
 }

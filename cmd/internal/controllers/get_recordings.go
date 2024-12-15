@@ -6,14 +6,14 @@ import (
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/internal/apierrors"
 	"path/filepath"
-	"strings"
+	"slices"
 )
 
-const _supportedFormat = "m4a"
+var _supportedFormats = []string{"wav", "mp3", "mp4", "m4a"}
 
 func (c Controller) GetRecordedPracticePhrase(ctx *gin.Context) {
 	toFormat := ctx.Param(constants.AudioFormatParamKey)
-	if !strings.EqualFold(toFormat, _supportedFormat) {
+	if !slices.Contains(_supportedFormats, toFormat) {
 		_ = ctx.Error(apierrors.BadRequestError("unsupported audio format"))
 		return
 	}
@@ -32,5 +32,9 @@ func (c Controller) GetRecordedPracticePhrase(ctx *gin.Context) {
 	ctx.Header("Content-Disposition", "attachment; filename="+filename)
 	ctx.Header("Content-Type", "audio/mp4")
 	ctx.Header("Content-Length", "0")
+	serveFile(ctx, filePath)
+}
+
+var serveFile = func(ctx *gin.Context, filePath string) {
 	ctx.File(filePath)
 }
