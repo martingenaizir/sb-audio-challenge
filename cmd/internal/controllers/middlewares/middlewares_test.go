@@ -92,7 +92,7 @@ func TestPhrasesPathValidation(t *testing.T) {
 				},
 			},
 			withError: true,
-			errPart:   "validation for 'UserID' failed",
+			errPart:   "invalid user id",
 		},
 		{
 			name: "invalid user_id",
@@ -106,7 +106,7 @@ func TestPhrasesPathValidation(t *testing.T) {
 				},
 			},
 			withError: true,
-			errPart:   "validation for 'UserID' failed",
+			errPart:   "invalid user id",
 		},
 		{
 			name: "invalid phrase_id",
@@ -120,7 +120,7 @@ func TestPhrasesPathValidation(t *testing.T) {
 				},
 			},
 			withError: true,
-			errPart:   "validation for 'PhraseID' failed",
+			errPart:   "invalid phrase id",
 		},
 		{
 			name: "no errors",
@@ -147,26 +147,6 @@ func TestPhrasesPathValidation(t *testing.T) {
 
 			if !tt.withError && len(ctx.Errors) > 0 {
 				t.Errorf("PhrasesPathValidation() = %v, want nil", ctx.Errors.String())
-			}
-		})
-	}
-}
-
-func Test_asInt64(t *testing.T) {
-	type args struct {
-		value string
-	}
-	tests := []struct {
-		name string
-		args args
-		want int64
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := asInt64(tt.args.value); got != tt.want {
-				t.Errorf("asInt64() = %v, want %v", got, tt.want)
 			}
 		})
 	}

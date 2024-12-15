@@ -1,6 +1,7 @@
 package fsclients
 
 import (
+	"context"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"mime/multipart"
 	"sync"
@@ -8,7 +9,7 @@ import (
 
 type Client interface {
 	StoreAs(file *multipart.FileHeader, bucket, filename string, toType FileType) (filePath string, err error)
-	RetrieveAs(filePath string, asType FileType) (string, error)
+	RetrieveAs(ctx context.Context, filePath string, asType FileType) (string, error)
 	Remove(filePath string) error
 }
 
@@ -18,7 +19,7 @@ type client struct {
 	tempPath string
 }
 
-func New() Client {
+func Instance() Client {
 	return &client{
 		mu:       &sync.Mutex{},
 		fsPath:   constants.UploadDir,

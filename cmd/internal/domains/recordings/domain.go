@@ -2,17 +2,27 @@ package recordings
 
 import (
 	"context"
+	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
+	"github.com/martingenaizir/sb-audio-challenge/cmd/modules/fsclients"
 	"mime/multipart"
 )
 
 type Domain interface {
-	RetrieveAs(ctx context.Context, filePath, format string) (string, error)
-	StoreAs(file *multipart.FileHeader, dstFilename, dstExtension string) (string, error)
-	RemoveFile(filePath string)
+	RetrieveAs(ctx context.Context, filePath, outFormat string) (string, error)
+	StoreAs(file *multipart.FileHeader, dstFilename, dstExtension string) (StoredFile, error)
+	RemoveFile(storedFile StoredFile)
 	ValidateFile(file *multipart.FileHeader) error
 }
 
+type domain struct {
+	withHistory bool
+	storage     fsclients.Client
+}
+
 func Instance() Domain {
-	// TODO
-	return nil
+	return &domain{
+		// TODO from .env
+		withHistory: constants.WithRecordingsHistory,
+		storage:     fsclients.Instance(),
+	}
 }

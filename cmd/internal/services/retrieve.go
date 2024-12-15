@@ -15,5 +15,5 @@ func (s services) GetUserRecordedPhrase(ctx context.Context, userID, phraseID in
 		return "", apierrors.NotFound("practice record not found")
 	}
 
-	return s.recordings.RetrieveAs(ctx, userPhraseData.RecordRelativePath(), outputFormat)
+	return s.recordings.RetrieveAs(ctx, userPhraseData.RecordPath(), outputFormat)
 }
