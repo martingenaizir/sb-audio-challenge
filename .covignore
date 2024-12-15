@@ -1,0 +1,4 @@
+cmd/api/
+cmd/constant/
+**/*_mock.go
+cmd/modules.
