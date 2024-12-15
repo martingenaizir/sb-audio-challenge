@@ -12,6 +12,7 @@ func (c Controller) StoreUserPracticePhrase(ctx *gin.Context) {
 	file, fileErr := formFile(ctx, constants.AudioFileFormKey)
 	if fileErr != nil {
 		_ = ctx.Error(apierrors.BadRequestError("missing or invalid audio file"))
+		return
 	}
 
 	if err := c.services.StoreUserRecordedPhrase(

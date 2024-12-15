@@ -25,7 +25,7 @@ func saveFromFile(file *multipart.FileHeader, dst string) error {
 	if err := checkDir(dst); err != nil {
 		return err
 	}
-	
+
 	f, err := file.Open()
 	if err != nil {
 		return err
@@ -56,9 +56,11 @@ func convertAudioFile(origin, dst string, toType FileType) error {
 	var cmd *exec.Cmd
 	switch toType.Type() {
 	case AudioM4A.Type():
-		cmd = exec.Command("ffmpeg", "-i", origin, "-c:a", "aac", "-b:a", "192k", dst)
+		cmd = exec.Command("ffmpeg", "-i", origin, "-c:a", "aac", "-b:a", "192k", "-y", dst)
 	case AudioWAV.Type():
-		cmd = exec.Command("ffmpeg", "-i", origin, dst)
+		cmd = exec.Command("ffmpeg", "-i", origin, "-y", dst)
+	case AudioMP3.Type():
+		cmd = exec.Command("ffmpeg", "-i", origin, "-vn", "-ar", "44100", "-ac", "2", "-b:a", "192k", "-y", dst)
 	default:
 		return fmt.Errorf("unsupported audio type: %s", toType.Type())
 	}

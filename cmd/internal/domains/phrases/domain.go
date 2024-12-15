@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"github.com/martingenaizir/sb-audio-challenge/cmd/modules/dbclients"
+	"os"
 )
 
 type Domain interface {
@@ -19,9 +20,8 @@ type domain struct {
 
 func Instance() Domain {
 	return &domain{
-		dbRead:  dbclients.Get(constants.DBReadPool),
-		dbWrite: dbclients.Get(constants.DBWritePool),
-		// TODO from .env
-		withHistory: constants.WithRecordingsHistory,
+		dbRead:      dbclients.Get(constants.DBReadPool),
+		dbWrite:     dbclients.Get(constants.DBWritePool),
+		withHistory: os.Getenv(constants.WithRecordingsHistoryKey) == "true",
 	}
 }

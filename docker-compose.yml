@@ -1,0 +1,39 @@
+services:
+  phrases_db:
+    image: mysql:8.0
+    restart: always
+    container_name: "go-api_db"
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./migrations/mysql:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "-p$$MYSQL_ROOT_PASSWORD" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    tty: true
+    networks:
+      - default
+
+  go-app:
+    container_name: "go-api_backend"
+    volumes:
+      - ./.env:/root/.env
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - phrases_db
+    networks:
+      - default
+
+volumes:
+  mysql-data:

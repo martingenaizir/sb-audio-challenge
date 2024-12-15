@@ -25,16 +25,15 @@ func loadDBPools() error {
 	// cutting corners here.
 	// each pool should have its specific config.
 
-	// TODO use .env
 	for _, pool := range constants.DBPools {
 		if _, err := dbclients.Build(dbclients.Config{
 			Key:   pool,
-			Name:  "audio_challenge_db",
-			User:  "root",
-			Pass:  "",
-			Host:  "localhost",
-			Port:  "3306",
-			Query: "charset=utf8&parseTime=true",
+			Name:  os.Getenv(constants.DBNameKey),
+			User:  os.Getenv(constants.DBUserKey),
+			Pass:  os.Getenv(constants.DBPassKey),
+			Host:  os.Getenv(constants.DBHostKey),
+			Port:  os.Getenv(constants.DBPortKey),
+			Query: os.Getenv(constants.DBQueryKey),
 		}); err != nil {
 			return err
 		}
