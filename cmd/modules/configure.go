@@ -23,7 +23,7 @@ func setLogLevel() {
 
 func loadDBPools() error {
 	// cutting corners here.
-	// each pool should have its specific config.
+	// each pool should have its own config.
 
 	for _, pool := range constants.DBPools {
 		if _, err := dbclients.Build(dbclients.Config{

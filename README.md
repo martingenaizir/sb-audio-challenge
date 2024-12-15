@@ -1,11 +1,13 @@
-# SpeakBuddy Audio-Challenge
+# SpeakBuddy's Audio-Challenge
 
 ![technology Go](https://img.shields.io/badge/technology-Go-blue.svg)
 ![storage MySQL](https://img.shields.io/badge/MySQL-black.svg)
 
 Simple Backend System for Uploading, Converting, and Retrieving User Audio Recordings in a Practice Phrase Application.
 
-[Challenge Doc](https://docs.google.com/document/d/19IV7EREMiYK6amIYYONmTUIDR3VqjYmKED0Ht45-IDo/edit?tab=t.0)
+## Author
+This project was created as part of the
+[SpeakBuddy's Audio Challenge](https://docs.google.com/document/d/19IV7EREMiYK6amIYYONmTUIDR3VqjYmKED0Ht45-IDo/edit?tab=t.0).
 
 ## Table of Contents
 - [Overview](#overview)
@@ -48,7 +50,7 @@ cd sb-audio-challenge
 docker compose up -d 
 ```
 
-The service will be available at `http://localhost:8080`.
+The application will run at `http://localhost:8080`.
 
 ### Preloaded Data
 The database has **2 users**, which correspond to the IDs: `1` and `2`
@@ -140,7 +142,7 @@ The history option can be enabled from the `./.env` file, by setting `app.keep_r
     - The ability to configure folders was not added to the FS.
 
 - Validations
-    - The error handler exposes date regardless the environment.
+    - The error handler exposes data regardless of the environment.
     - The storage modules (FS and DB) has weak validations, and in some cases none at all.
     - The domains have weak data validation.
 
