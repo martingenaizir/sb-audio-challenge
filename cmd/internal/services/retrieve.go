@@ -6,7 +6,7 @@ import (
 )
 
 func (s services) GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, error) {
-	userPhraseData, err := s.phrases.GetUserPracticeData(ctx, userID, phraseID)
+	userPhraseData, err := s.phrases.GetPracticeData(ctx, userID, phraseID)
 	if err != nil {
 		return "", err
 	}

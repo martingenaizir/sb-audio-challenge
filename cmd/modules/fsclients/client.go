@@ -2,9 +2,14 @@ package fsclients
 
 import (
 	"context"
-	"github.com/martingenaizir/sb-audio-challenge/cmd/constants"
 	"mime/multipart"
 	"sync"
+)
+
+// of course, this should not be defined here.
+const (
+	uploadDir = "resources/uploads/"
+	tempDir   = "resources/temp/"
 )
 
 type Client interface {
@@ -19,10 +24,13 @@ type client struct {
 	tempPath string
 }
 
+// cutting corners here.
+// this should be singleton and build by pool.
+
 func Instance() Client {
 	return &client{
 		mu:       &sync.Mutex{},
-		fsPath:   constants.UploadDir,
-		tempPath: constants.TempDir,
+		fsPath:   uploadDir,
+		tempPath: tempDir,
 	}
 }
