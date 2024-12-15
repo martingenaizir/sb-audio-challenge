@@ -6,16 +6,16 @@ import (
 )
 
 type Mock struct {
-	OnGetUserRecordedPhrase   func(ctx context.Context, userID, phraseID int64, outputFormat string) (string, error)
+	OnGetUserRecordedPhrase   func(ctx context.Context, userID, phraseID int64, outputFormat string) (string, string, error)
 	OnStoreUserRecordedPhrase func(ctx context.Context, userID, phraseID int64, recordingFile *multipart.FileHeader) error
 }
 
-func (m Mock) GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, error) {
+func (m Mock) GetUserRecordedPhrase(ctx context.Context, userID, phraseID int64, outputFormat string) (string, string, error) {
 	if m.OnGetUserRecordedPhrase != nil {
 		return m.OnGetUserRecordedPhrase(ctx, userID, phraseID, outputFormat)
 	}
 
-	return "", nil
+	return "", "", nil
 }
 
 func (m Mock) StoreUserRecordedPhrase(ctx context.Context, userID, phraseID int64, recordingFile *multipart.FileHeader) error {

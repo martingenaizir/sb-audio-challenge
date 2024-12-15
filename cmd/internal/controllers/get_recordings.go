@@ -20,7 +20,7 @@ func (c Controller) GetRecordedPracticePhrase(ctx *gin.Context) {
 
 	userID := ctx.GetInt64(constants.UserIDParamKey)
 	phraseID := ctx.GetInt64(constants.PhraseIDParamKey)
-	filePath, err := c.services.GetUserRecordedPhrase(ctx.Request.Context(), userID, phraseID, toFormat)
+	filePath, mimeType, err := c.services.GetUserRecordedPhrase(ctx.Request.Context(), userID, phraseID, toFormat)
 	if err != nil {
 		_ = ctx.Error(err)
 		return
@@ -30,7 +30,7 @@ func (c Controller) GetRecordedPracticePhrase(ctx *gin.Context) {
 	ctx.Header("Content-Description", "File Transfer")
 	ctx.Header("Content-Transfer-Encoding", "binary")
 	ctx.Header("Content-Disposition", "attachment; filename="+filename)
-	ctx.Header("Content-Type", "audio/mp4")
+	ctx.Header("Content-Type", mimeType)
 	ctx.Header("Content-Length", "0")
 	serveFile(ctx, filePath)
 }

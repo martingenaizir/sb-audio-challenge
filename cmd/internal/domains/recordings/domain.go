@@ -9,7 +9,7 @@ import (
 )
 
 type Domain interface {
-	RetrieveAs(ctx context.Context, filePath, outFormat string) (string, error)
+	RetrieveAs(ctx context.Context, filePath, outFormat string) (string, string, error)
 	StoreAs(file *multipart.FileHeader, dstFilename, dstExtension string) (StoredFile, error)
 	RemoveFile(storedFile StoredFile)
 	ValidateFile(file *multipart.FileHeader) error
